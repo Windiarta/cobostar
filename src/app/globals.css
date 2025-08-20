@@ -20,7 +20,123 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, sans-serif);
+  background: #f8fafc;
+  color: #222;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111;
+    color: #eee;
+  }
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal styles (for later) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #fff;
+  color: #222;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  animation: modalIn 0.3s cubic-bezier(.4,2,.6,1) both;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #222;
+    color: #fff;
+  }
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.95) translateY(40px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Slider transition */
+.slider-img {
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+/* Fade-up animation for cards */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero image fade + zoom */
+.hero-img {
+  animation: heroFade 1s ease-out both;
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Product detail layout */
+.product-detail {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .product-detail { grid-template-columns: 1fr; }
+}
+
+.thumb-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.thumb-item {
+  position: relative;
+  width: 84px;
+  height: 56px; /* 3:2 */
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.thumb-item img { object-fit: cover; }
+
+.thumb-item.active { outline: 2px solid #2563eb; }

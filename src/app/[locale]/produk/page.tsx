@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { messages } from "../../../i18n/messages";
 
@@ -72,20 +72,46 @@ function ProductDetail({ product, idx }: { product: ProductItem; idx: number }) 
   const [imgIdx, setImgIdx] = useState(0);
   const folder = product.folder || slugify(product.name) || `product${idx + 1}`;
   const candidateImages = Array.from({ length: 10 }, (_, i) => `/images/products/${folder}/${i + 1}.jpg`);
+  const [available, setAvailable] = useState<boolean[]>(() => Array(candidateImages.length).fill(false));
+
+  function findNextAvailable(start: number, direction: 1 | -1) {
+    for (let step = 1; step <= candidateImages.length; step++) {
+      const next = (start + direction * step + candidateImages.length) % candidateImages.length;
+      if (available[next]) return next;
+    }
+    return start;
+  }
+
+  useEffect(() => {
+    if (!available[imgIdx]) {
+      const first = available.findIndex(Boolean);
+      if (first !== -1) setImgIdx(first);
+    }
+  }, [available, imgIdx]);
 
   return (
     <div className="product-detail">
       <div>
         <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
-          <button onClick={() => setImgIdx(i => (i - 1 + candidateImages.length) % candidateImages.length)} className="absolute left-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8592;</button>
-          <Image src={candidateImages[imgIdx]} alt={product.name} fill className="object-cover slider-img" />
-          <button onClick={() => setImgIdx(i => (i + 1) % candidateImages.length)} className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8594;</button>
+          <button onClick={() => setImgIdx(i => findNextAvailable(i, -1))} className="absolute left-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8592;</button>
+          <Image src={candidateImages[imgIdx]} alt={product.name} fill className="object-cover slider-img" onError={() => setImgIdx(i => findNextAvailable(i, 1))} />
+          <button onClick={() => setImgIdx(i => findNextAvailable(i, 1))} className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8594;</button>
         </div>
         <div className="thumb-row">
           {candidateImages.map((src, i) => (
-            <div key={i} className={`thumb-item ${i === imgIdx ? "active" : ""}`} onClick={() => setImgIdx(i)}>
+            <div
+              key={i}
+              className={`thumb-item ${i === imgIdx ? "active" : ""} ${available[i] ? "" : "pointer-events-none opacity-40"}`}
+              onClick={() => available[i] && setImgIdx(i)}
+              aria-disabled={!available[i]}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="thumb" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+              <img
+                src={src}
+                alt="thumb"
+                onLoad={() => setAvailable(prev => { const copy = [...prev]; copy[i] = true; return copy; })}
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; setAvailable(prev => { const copy = [...prev]; copy[i] = false; return copy; }); }}
+              />
             </div>
           ))}
         </div>

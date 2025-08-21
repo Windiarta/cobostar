@@ -9,11 +9,23 @@ export const messages = {
     },
     hero: {
       company: "PT Cobostar Industrial Indonesia",
-      shortDesc: "Kualitas utama, pelanggan yang terpenting.",
+      shortDesc: "Kualitas utama, pelanggan prioritas",
     },
     about: {
       title: "Tentang Perusahaan",
-      desc: "[Deskripsi Perusahaan]",
+      desc: `Cobostar Industrial Indonesia adalah perusahaan berbasis di Hong Kong dengan pabrik yang berlokasi di Kota Yangzhong, yang dikenal sebagai “Mutiara di Sungai Yangtze.” Lokasi geografis yang strategis dan akses transportasi yang mudah memberikan keuntungan besar bagi perusahaan kami.
+
+Didirikan pada tahun 1982, perusahaan kami memiliki lebih dari 30 tahun pengalaman produksi. Kami adalah salah satu produsen utama pemanas listrik untuk pertambangan, komponen desulfurisasi, batang pemanas listrik untuk perawatan busbar turbin, serta peralatan pemanas listrik yang digunakan dalam berbagai aplikasi.
+
+Produk utama kami banyak digunakan di pabrik baja, metalurgi, pembangkit listrik, industri petrokimia, perlakuan panas, pengeboran minyak darat dan lepas pantai, manufaktur mesin, galangan kapal, serta industri pelayaran.
+
+Saat ini perusahaan kami mempekerjakan lebih dari 100 orang, termasuk 20 staf senior di bidang teknis dan manajemen, 30 teknisi dengan latar belakang pendidikan perguruan tinggi atau universitas, serta 12 operator komputer. Kami memiliki tenaga ahli dengan keterampilan di semua tingkatan dan posisi teknis.
+
+Perusahaan kami didukung oleh sistem desain berbantuan komputer (CAD) dan simulasi proses, serta menerapkan sistem manajemen mutu yang lengkap. Kami juga memiliki peralatan produksi modern seperti mesin pembengkok pipa, mesin pembengkok bilah, mesin pengecil tabung, mesin bubut CNC, mesin milling CNC, dan mesin punching otomatis. Berkat penerapan manajemen modern ini, produk kami mendapat sambutan baik dari pelanggan domestik maupun internasional, sehingga perusahaan terus berkembang meskipun menghadapi persaingan pasar yang ketat.
+
+Kami telah membangun jaringan penjualan dan layanan yang luas serta mendirikan cabang pemrosesan dan kerja sama di luar negeri. Cobostar Industrial Indonesia telah menjadi merek terpercaya di kalangan pengguna.
+
+Seiring dengan perkembangan teknologi dan meningkatnya permintaan pasar, perusahaan kami senantiasa mengikuti perkembangan zaman dengan memanfaatkan keunggulan internet untuk meningkatkan daya saing, serta berupaya menjaga stabilitas dan pertumbuhan pangsa pasar.`,
     },
     highlight: {
       title: "Produk Unggulan",
@@ -127,11 +139,23 @@ export const messages = {
     },
     hero: {
       company: "PT Cobostar Industrial Indonesia",
-      shortDesc: "Quality first, customer foremost.",
+      shortDesc: "Quality first, customer foremost",
     },
     about: {
       title: "About Company",
-      desc: "[Company Description]",
+      desc: `Cobostar Industrial is a Hong Kong-based company with a factory in Yangzhong City, known as the "Pearl in the Yangtze River." Its advantageous geographical location and convenient transportation provide favorable conditions for our company.
+
+Founded in 1982, our company has over 30 years of production experience. We are one of the main manufacturers of electric heaters for mining, desulfurization components, electric heating rods for turbine busbar maintenance, and electric heating equipment used in various applications.
+
+Our main products are widely used in steel plants, metallurgy, power plants, petrochemical industries, heat treatment, oil extraction, offshore oil drilling, machinery manufacturing, shipbuilding, and shipping industries.
+
+Our company currently employs over 100 people, including 20 senior technical and management staff, 30 engineering technicians with college or university degrees, and 12 computer operators. We have skilled personnel at all technical levels and positions.
+
+We are equipped with computer-aided design (CAD) and process simulation systems, and we maintain a complete quality management system. We also have modern production equipment such as pipe bending machines, blade bending machines, tube shrinking machines, CNC lathes, CNC milling machines, and automatic punching machines. These modern management practices have made our products well-received by both domestic and international customers, allowing the company to grow in the face of fierce market competition.
+
+We have established a large sales and service network and set up processing and cooperative branches abroad. "Cobostar Industrial" has become a trusted brand among users.
+
+With continuous technological development and rising market demands, our company keeps pace with the times, fully utilizing the advantages of the internet to enhance competitiveness, striving for a stable and growing market presence.`,
     },
     highlight: {
       title: "Featured Products",

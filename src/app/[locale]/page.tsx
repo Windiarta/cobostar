@@ -6,9 +6,9 @@ import { useParams } from "next/navigation";
 import { messages } from "../../i18n/messages";
 
 const HERO_IMAGES = [
-  "/images/company/36.jpg",
-  "/images/company/37.jpg",
-  "/images/company/38.jpg",
+  "/images/company/1.jpg",
+  "/images/company/2.jpg",
+  "/images/company/3.jpg",
 ];
 
 function slugify(name: string) {
@@ -23,25 +23,50 @@ export default function Home() {
   const nextHero = () => setHeroIdx((i) => (i + 1) % HERO_IMAGES.length);
   const prevHero = () => setHeroIdx((i) => (i - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
 
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      setHeroIdx((i) => (i + 1) % HERO_IMAGES.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   const t = messages[locale];
-  const heroSrc = HERO_IMAGES[heroIdx] || null;
+  const aboutParas = String(t.about.desc).split(/\n{2,}/);
+  const aboutImages = ["/images/company/36.jpg", "/images/company/37.jpg"];
+  const perSection = Math.ceil(aboutParas.length / aboutImages.length) || 1;
+  const aboutSections = aboutImages.map((img, idx) => ({
+    img,
+    paras: aboutParas.slice(idx * perSection, (idx + 1) * perSection),
+  }));
 
   return (
     <div className="flex flex-col gap-20 md:gap-24">
       {/* Hero Section */}
       <section className="relative w-full h-[82vh] md:h-[86vh] flex items-center justify-center overflow-hidden">
         <button onClick={prevHero} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-black/70 rounded-full p-3 shadow hover:scale-110 transition z-10">&#8592;</button>
-        {heroSrc && (
-          <Image
-            key={heroIdx}
-            src={heroSrc}
-            alt="Hero"
-            fill
-            className="object-cover object-center hero-img"
-            priority
-          />
-        )}
+
+        {/* Sliding Track */}
+        <div className="absolute inset-0">
+          <div
+            className="flex h-full transition-transform duration-700 ease-in-out will-change-transform"
+            style={{ transform: `translateX(-${heroIdx * 100}%)` }}
+          >
+            {HERO_IMAGES.map((src, idx) => (
+              <div key={idx} className="relative w-full h-full flex-shrink-0">
+                <Image
+                  src={src}
+                  alt={`Hero ${idx + 1}`}
+                  fill
+                  className="object-cover object-center"
+                  priority={idx === 0}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
         <button onClick={nextHero} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-black/70 rounded-full p-3 shadow hover:scale-110 transition z-10">&#8594;</button>
+
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-white text-center px-6">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-wide mb-4 drop-shadow-lg uppercase">{t.hero.company}</h1>
           <p className="text-xl md:text-2xl font-medium drop-shadow max-w-3xl">{t.hero.shortDesc}</p>
@@ -49,12 +74,40 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="mx-10 px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide uppercase">{t.about.title}</h2>
-        <div className="h-1 w-14 bg-blue-600 mx-auto mt-3 rounded"></div>
-        <p className="mt-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed max-w-4xl mx-auto">
-          {t.about.desc}
-        </p>
+      <section className="mx-10 px-6">
+        <div className="text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide uppercase">{t.about.title}</h2>
+          <div className="h-1 w-14 bg-blue-600 mx-auto mt-3 rounded"></div>
+        </div>
+        {aboutSections.map((sec, idx) => (
+          <div key={idx} className={`mt-10 grid grid-cols-1 md:grid-cols-5 gap-8 items-start`}>
+            {/* Text */}
+            <div className={`md:col-span-3 ${idx % 2 === 0 ? "md:order-1" : "md:order-2"}`}>
+              {sec.paras.length === 0 ? (
+                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">&nbsp;</p>
+              ) : (
+                sec.paras.map((para, pidx) => (
+                  <p key={pidx} className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+                    {para}
+                  </p>
+                ))
+              )}
+            </div>
+            {/* Image */}
+            <div className={`md:col-span-2 ${idx % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
+              <div className="relative w-full md:w-4/5 lg:w-3/4 aspect-[3/4] overflow-hidden rounded-xl shadow-md border border-gray-200 dark:border-gray-800 mx-auto">
+                <Image
+                  src={sec.img}
+                  alt={`Company ${idx + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                  priority={idx === 0}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* Product Highlights styled like reference */}

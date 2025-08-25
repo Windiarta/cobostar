@@ -71,7 +71,7 @@ export default function Produk() {
 function ProductDetail({ product, idx }: { product: ProductItem; idx: number }) {
   const [imgIdx, setImgIdx] = useState(0);
   const folder = product.folder || slugify(product.name) || `product${idx + 1}`;
-  const candidateImages = Array.from({ length: 10 }, (_, i) => `/images/products/${folder}/${i + 1}.jpg`);
+  const candidateImages = Array.from({ length: 5 }, (_, i) => `/images/products/${folder}/${i + 1}.jpg`);
   const [available, setAvailable] = useState<boolean[]>(() => Array(candidateImages.length).fill(false));
 
   function findNextAvailable(start: number, direction: 1 | -1) {
@@ -94,7 +94,7 @@ function ProductDetail({ product, idx }: { product: ProductItem; idx: number }) 
       <div>
         <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
           <button onClick={() => setImgIdx(i => findNextAvailable(i, -1))} className="absolute left-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8592;</button>
-          <Image src={candidateImages[imgIdx]} alt={product.name} fill className="object-cover slider-img" onError={() => setImgIdx(i => findNextAvailable(i, 1))} />
+          <Image key={candidateImages[imgIdx]} src={candidateImages[imgIdx]} alt={product.name} fill className="object-cover slider-img" sizes="(max-width: 768px) 100vw, 80vw" onError={() => setImgIdx(i => findNextAvailable(i, 1))} />
           <button onClick={() => setImgIdx(i => findNextAvailable(i, 1))} className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 rounded-full p-2 shadow hover:scale-110 transition z-10">&#8594;</button>
         </div>
         <div className="thumb-row">

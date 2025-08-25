@@ -77,7 +77,7 @@ export default function Home() {
       <section className="mx-10 px-6">
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide uppercase">{t.about.title}</h2>
-          <div className="h-1 w-14 bg-blue-600 mx-auto mt-3 rounded"></div>
+          <div className="h-1 w-14 bg-blue-600 dark:bg-blue-400 mx-auto mt-3 rounded"></div>
         </div>
         {aboutSections.map((sec, idx) => (
           <div key={idx} className={`mt-10 grid grid-cols-1 md:grid-cols-5 gap-8 items-start`}>
@@ -113,7 +113,7 @@ export default function Home() {
       {/* Product Highlights styled like reference */}
       <section className="mx-10 px-6">
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-center uppercase">{t.highlight.title}</h2>
-        <div className="h-1 w-14 bg-blue-600 mx-auto mt-3 mb-8 rounded"></div>
+        <div className="h-1 w-14 bg-blue-600 dark:bg-blue-400 mx-auto mt-3 mb-8 rounded"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {t.produk.products.slice(0, 3).map((p, idx) => {
             const folder = p.folder || slugify(p.name);
@@ -140,9 +140,27 @@ export default function Home() {
           })}
         </div>
         <div className="flex justify-center mt-10">
-          <Link href={`/${locale}/produk`} className="px-7 py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition">
+          <Link href={`/${locale}/produk`} className="px-7 py-3 rounded-lg bg-blue-600 dark:bg-blue-500 text-white font-bold hover:bg-blue-700 dark:hover:bg-blue-600 transition">
             {t.highlight.seeAll}
           </Link>
+        </div>
+      </section>
+      {/* Image Gallery */}
+      <section className="mx-10 px-6">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-center uppercase">{t.hero.gallery ?? (locale === "id" ? "Galeri" : "Gallery")}</h2>
+        <div className="h-1 w-14 bg-blue-600 dark:bg-blue-400 mx-auto mt-3 mb-8 rounded"></div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {HERO_IMAGES.concat(aboutImages).slice(0, 8).map((src, idx) => (
+            <div key={idx} className="relative aspect-square overflow-hidden rounded-xl group border border-gray-200 dark:border-gray-800">
+              <Image
+                src={src}
+                alt={`Gallery ${idx + 1}`}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+              />
+            </div>
+          ))}
         </div>
       </section>
     </div>

@@ -3,13 +3,16 @@ export const messages = {
     nav: {
       company: "PT Cobostar Industrial Indonesia",
       home: "Home",
+      profile: "Profil",
       produk: "Produk",
+      kontak: "Kontak",
       indonesia: "ID",
       english: "EN",
     },
     hero: {
       company: "PT Cobostar Industrial Indonesia",
       shortDesc: "Kualitas utama, pelanggan prioritas",
+      gallery: "Galeri"
     },
     about: {
       title: "Tentang Perusahaan",
@@ -26,6 +29,14 @@ Perusahaan kami didukung oleh sistem desain berbantuan komputer (CAD) dan simula
 Kami telah membangun jaringan penjualan dan layanan yang luas serta mendirikan cabang pemrosesan dan kerja sama di luar negeri. Cobostar Industrial Indonesia telah menjadi merek terpercaya di kalangan pengguna.
 
 Seiring dengan perkembangan teknologi dan meningkatnya permintaan pasar, perusahaan kami senantiasa mengikuti perkembangan zaman dengan memanfaatkan keunggulan internet untuk meningkatkan daya saing, serta berupaya menjaga stabilitas dan pertumbuhan pangsa pasar.`,
+      highlights: {
+        foundedLabel: "Didirikan",
+        foundedValue: "1982",
+        experienceLabel: "Pengalaman",
+        experienceValue: "30+ Tahun",
+        employeesLabel: "Karyawan",
+        employeesValue: "100+",
+      },
     },
     highlight: {
       title: "Produk Unggulan",
@@ -133,13 +144,16 @@ Seiring dengan perkembangan teknologi dan meningkatnya permintaan pasar, perusah
     nav: {
       company: "PT Cobostar Industrial Indonesia",
       home: "Home",
+      profile: "Profile",
       produk: "Products",
+      kontak: "Contact",
       indonesia: "ID",
       english: "EN",
     },
     hero: {
       company: "PT Cobostar Industrial Indonesia",
       shortDesc: "Quality first, customer foremost",
+      gallery: "Gallery"
     },
     about: {
       title: "About Company",
@@ -156,6 +170,14 @@ We are equipped with computer-aided design (CAD) and process simulation systems,
 We have established a large sales and service network and set up processing and cooperative branches abroad. "Cobostar Industrial" has become a trusted brand among users.
 
 With continuous technological development and rising market demands, our company keeps pace with the times, fully utilizing the advantages of the internet to enhance competitiveness, striving for a stable and growing market presence.`,
+      highlights: {
+        foundedLabel: "Founded",
+        foundedValue: "1982",
+        experienceLabel: "Experience",
+        experienceValue: "30+ Years",
+        employeesLabel: "Employees",
+        employeesValue: "100+",
+      },
     },
     highlight: {
       title: "Featured Products",
